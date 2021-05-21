@@ -12,6 +12,7 @@ $txt = "SELECT
 			  forma_pagamento.ffpNome,
 			  curso.cDesc,
                     factura_propina.mes_pago,
+                    disciplina.dDesc,
                     users.nome as funcionario
 			FROM
 			  factura
@@ -21,6 +22,8 @@ $txt = "SELECT
 			  INNER JOIN curso ON (estudante.id_curso = curso.id)
                     INNER JOIN factura_propina ON (factura_propina.id_factura = factura.id)
                     INNER JOIN users ON (users.id = factura.id_funcionario)
+                    INNER JOIN factura_exame ON (factura_exame.id_factura = factura.id)
+                    INNER JOIN disciplina ON (disciplina.id = factura_exame.id_disciplina)
 			WHERE
 			  (factura.id = '" . $_GET["id_Ma"] . "')";
 
@@ -100,6 +103,18 @@ if ($query[0]['id_tipo_pagamento'] == 2) {
       $pdf->SetFont('Arial', '', 10);
       $pdf->Cell(0, 6, utf8_decode($query[0]['mes_pago']), 0, 0, 'L');
 
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->Cell(20, 6, '', 0, 0, 'L');
+      $pdf->SetFont('Arial', '', 10);
+      $pdf->Cell(0, 6, '', 0, 0, 'L');
+}
+
+if ($query[0]['id_tipo_pagamento'] == 3) {
+      $pdf->Ln();
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->Cell(23, 6, utf8_decode('Disciplina: '), 0, 0, 'L');
+      $pdf->SetFont('Arial', '', 10);
+      $pdf->Cell(0, 6, utf8_decode($query[0]['dDesc']), 0, 0, 'L');
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->Cell(20, 6, '', 0, 0, 'L');
       $pdf->SetFont('Arial', '', 10);
@@ -223,6 +238,18 @@ if ($query[0]['id_tipo_pagamento'] == 2) {
       $pdf->SetFont('Arial', '', 10);
       $pdf->Cell(0, 6, utf8_decode($query[0]['mes_pago']), 0, 0, 'L');
 
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->Cell(20, 6, '', 0, 0, 'L');
+      $pdf->SetFont('Arial', '', 10);
+      $pdf->Cell(0, 6, '', 0, 0, 'L');
+}
+
+if ($query[0]['id_tipo_pagamento'] == 3) {
+      $pdf->Ln();
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->Cell(23, 6, utf8_decode('Disciplina: '), 0, 0, 'L');
+      $pdf->SetFont('Arial', '', 10);
+      $pdf->Cell(0, 6, utf8_decode($query[0]['dDesc']), 0, 0, 'L');
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->Cell(20, 6, '', 0, 0, 'L');
       $pdf->SetFont('Arial', '', 10);
