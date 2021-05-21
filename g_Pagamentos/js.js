@@ -3,6 +3,8 @@ var _url = '../g_Pagamentos/php.php';
 
 $(document).ready(function (e) {
 
+
+	__LOAD_();
 	$('#viewPPP').css('display', 'none');
 	$('#bi').clearFile('save_', 'true', '../images/mono-icons/paperlock32.png', 'error');
 	$('#estudante').clearFile('save_', 'true', '../images/mono-icons/paperlock32.png', 'error');
@@ -30,8 +32,6 @@ $(document).ready(function (e) {
 	});
 	$('#grelha').change(function () { __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php'); });
 
-
-	__LOAD_();
 });
 
 function __SAVE_() {
@@ -126,8 +126,10 @@ function __LOAD_() {
 		type: "POST", url: _url, data: { accion: "load" }, async: false,
 		success: function (data) {
 
+			
 			var i = 0;
 			dt_data = eval(data);
+			console.log(dt_data)
 			$('#_list').DataTable({
 				"destroy": true,
 				"data": dt_data,

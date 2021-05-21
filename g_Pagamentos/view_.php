@@ -61,7 +61,7 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                       <table width="60%">
                         <tr>
                           <td align="right"><strong>BI/Passaporte:</strong></td>
-                          <td><input name="bi" type="text" id="bi" value="">
+                          <td><input name="bi" type="text" id="bi">
                             <font color="#FF0000">*</font>
                           </td>
                         </tr>
@@ -82,7 +82,8 @@ if (!isset($_SESSION["usser"])) { ?> <script>
 
                         <tr>
                           <td align="right"><strong>Valor:</strong></td>
-                          <td><span id="valor_emulumentos" class="valor-em" />
+                          <td><span id="valor_emulumentos" class="valor-em">
+                                  500
                             </span>
                           </td>
                         </tr>
