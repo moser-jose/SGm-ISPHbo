@@ -24,7 +24,19 @@ $(document).ready(function (e) {
 	_set_mounthBox('mes');
 
 	$('#bi').keyup(function (e) { if (e.keyCode == 13) { _get_EST_() } });
-	$('#tipo_pagamento').change(function () { set_detalhe(); });
+	$('#tipo_pagamento').change(function () {
+		set_detalhe();
+		if ($('#tipo_pagamento').val() > 0) {
+			_PEGARDADOS_('val_e', $('#tipo_pagamento').val(), 'getTP', 'valor_emulumentos', _url);
+
+		}
+		else {
+			$('#val_e').css({
+				'display': 'none'
+			});
+		}
+
+	});
 	$('#imposto, #desconto').keyup(function () {
 		if ($('#desconto').val() != '')
 			parseFloat($('#valor_final').val($('#imposto').val() - $('#desconto').val())); else
@@ -125,11 +137,8 @@ function __LOAD_() {
 	$.ajax({
 		type: "POST", url: _url, data: { accion: "load" }, async: false,
 		success: function (data) {
-
-			
 			var i = 0;
 			dt_data = eval(data);
-			console.log(dt_data)
 			$('#_list').DataTable({
 				"destroy": true,
 				"data": dt_data,

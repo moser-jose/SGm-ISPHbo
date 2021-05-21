@@ -80,7 +80,7 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                           </td>
                         </tr>
 
-                        <tr>
+                        <tr id="val_e" style="display: none;">
                           <td align="right"><strong>Valor:</strong></td>
                           <td><span id="valor_emulumentos" class="valor-em">
                                   500

@@ -1,22 +1,43 @@
 function __GET_COMBOXS_(idc, action, value, url_) {
 	$('#' + idc).html('');
-
+	var costo = 0;
 	$.ajax({
 		type: "POST", url: url_, data: "accion=" + action,
 		success: function (data) {
 			data = eval(data);
 			se = document.getElementById(idc);
+
 			op = '';
 			op = "<option value=" + '0' + ">Selecione --</option>";
 			$.each(data, function (i, dat) {
-				costo = dat['costo'];
+				costo = dat["costo"];
 				op += '<option style="cursor:pointer" value="' + dat["id"] + '">' + dat[value] + '</option>';
 			});
-
+			console.log(costo);
 			se.innerHTML = op;
 		}, async: false
 	});
 }
+
+function _PEGARDADOS_(tr, id, action, campo, url_) {
+	tb = document.getElementById(tr);
+	se = document.getElementById(campo);
+	tb.style.display = "contents";
+	$.ajax({
+		type: "POST", url: url_, data: "accion=" + action,
+		success: function (data) {
+			data = eval(data);
+			$.each(data, function (i, dat) {
+				if (id === dat['id']) {
+					se.innerText = dat['costo'];
+				}
+			});
+
+		}, async: false
+	});
+}
+
+
 //-------------------------------------
 function _idioma(idioma) {
 	switch (idioma) {
