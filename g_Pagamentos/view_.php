@@ -83,7 +83,6 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                         <tr id="val_e" style="display: none;">
                           <td align="right"><strong>Valor:</strong></td>
                           <td><span id="valor_emulumentos" class="valor-em">
-                                  500
                             </span>
                           </td>
                         </tr>
@@ -124,18 +123,18 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                         </tr>
                         <tr>
                           <td align="right" scope="row"><strong>Multa:</strong></td>
-                          <td><input name="imposto" type="text" id="imposto" />
+                          <td><input name="imposto" value="0" type="text" id="imposto" />
                             <font color="#FF0000">*</font>
                           </td>
                         </tr>
                         <tr>
                           <td align="right" scope="row"><strong>Desconto:</strong></td>
-                          <td><input name="desconto" type="text" id="desconto" />
+                          <td><input name="desconto" value="0" type="text" id="desconto" />
                           </td>
                         </tr>
                         <tr>
                           <td align="right" scope="row"><strong>Valor Final:</strong></td>
-                          <td><input name="valor_final" type="text" id="valor_final" readonly />
+                          <td><input name="valor_final" value="0" type="text" id="valor_final" readonly />
                           </td>
                         </tr>
                       </table>

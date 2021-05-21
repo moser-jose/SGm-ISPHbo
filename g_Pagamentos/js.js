@@ -23,24 +23,34 @@ $(document).ready(function (e) {
 	__GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
 	_set_mounthBox('mes');
 
+	var cb;
 	$('#bi').keyup(function (e) { if (e.keyCode == 13) { _get_EST_() } });
 	$('#tipo_pagamento').change(function () {
 		set_detalhe();
 		if ($('#tipo_pagamento').val() > 0) {
-			_PEGARDADOS_('val_e', $('#tipo_pagamento').val(), 'getTP', 'valor_emulumentos', _url);
-
+			cb = _PEGARDADOS_('val_e', $('#tipo_pagamento').val(), 'getTP', 'valor_emulumentos', _url);
+			$('#valor_final').val(cb)
 		}
 		else {
 			$('#val_e').css({
 				'display': 'none'
 			});
+
 		}
 
 	});
 	$('#imposto, #desconto').keyup(function () {
+		if ($('#desconto').val() == '') {
+			$('#desconto').val(0)
+		}
+		if ($('#imposto').val() == '') {
+			$('#imposto').val(0)
+		}
 		if ($('#desconto').val() != '')
-			parseFloat($('#valor_final').val($('#imposto').val() - $('#desconto').val())); else
+			parseFloat($('#valor_final').val(parseFloat($('#valor_emulumentos').text()) + ((parseFloat($('#valor_emulumentos').text()) * $('#imposto').val()) / 100) - ((parseFloat($('#valor_emulumentos').text()) * $('#desconto').val()) / 100)));
+		else
 			$('#valor_final').val($('#imposto').val());
+
 	});
 	$('#grelha').change(function () { __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php'); });
 

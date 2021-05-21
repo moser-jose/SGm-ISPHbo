@@ -13,7 +13,6 @@ function __GET_COMBOXS_(idc, action, value, url_) {
 				costo = dat["costo"];
 				op += '<option style="cursor:pointer" value="' + dat["id"] + '">' + dat[value] + '</option>';
 			});
-			console.log(costo);
 			se.innerHTML = op;
 		}, async: false
 	});
@@ -22,7 +21,9 @@ function __GET_COMBOXS_(idc, action, value, url_) {
 function _PEGARDADOS_(tr, id, action, campo, url_) {
 	tb = document.getElementById(tr);
 	se = document.getElementById(campo);
-	tb.style.display = "contents";
+	tb.style = "display:contents";
+	se.style = "width:165px;border-bottom: 1.5px solid #1D2031;display:inline-table";
+	var cb = 0;
 	$.ajax({
 		type: "POST", url: url_, data: "accion=" + action,
 		success: function (data) {
@@ -30,11 +31,14 @@ function _PEGARDADOS_(tr, id, action, campo, url_) {
 			$.each(data, function (i, dat) {
 				if (id === dat['id']) {
 					se.innerText = dat['costo'];
+					cb = dat['costo'];
 				}
 			});
 
 		}, async: false
 	});
+
+	return cb;
 }
 
 
