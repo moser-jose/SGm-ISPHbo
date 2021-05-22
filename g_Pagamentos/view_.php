@@ -61,7 +61,7 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                       <table width="60%">
                         <tr>
                           <td align="right"><strong>BI/Passaporte:</strong></td>
-                          <td><input name="bi" type="text" id="bi">
+                          <td><input name="bi" type="text" id="bi" value="007251946LA041">
                             <font color="#FF0000">*</font>
                           </td>
                         </tr>
