@@ -18,7 +18,19 @@ $(document).ready(function (e) {
 
 	__GET_COMBOXS_('banco', 'getBanco', 'bancNome', _url);
 	__GET_COMBOXS_('modo_pagamento', 'getfPag', 'ffpNome', _url);
+
+
+
+	//Para mudar a conta do banco de acordo ao banco
 	__GET_COMBOXS_('conta', 'getConta&b=' + $('#banco').val(), 'contNumero', _url);
+
+	$("select.nomeBanco").change(function () {
+		var idBanco = $(this).attr('value');
+		__GET_COMBOXS_('conta', 'getConta&b=' + idBanco, 'contNumero', _url);
+
+	});
+	//============================
+
 	_getGrelha_();
 	__GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
 	_set_mounthBox('mes');
@@ -30,8 +42,7 @@ $(document).ready(function (e) {
 		if ($('#tipo_pagamento').val() > 0) {
 			cb = _PEGARDADOS_('val_e', $('#tipo_pagamento').val(), 'getTP', 'valor_emulumentos', _url);
 			$('#valor_final').val(cb)
-		}
-		else {
+		} else {
 			$('#val_e').css({
 				'display': 'none'
 			});
@@ -71,7 +82,8 @@ function __SAVE_() {
 	arr.push({ "name": "id_funcionario", "value": $('#func').val() });
 
 	tp = $('#tipo_pagamento').val();
-	if (tp == 2) mes = $('#mes').val(); else
+	if (tp == 2) mes = $('#mes').val();
+	else
 		if (tp == 3) disc = $('#disc').val();
 
 
@@ -86,8 +98,11 @@ function __SAVE_() {
 
 	//buscar el id insertado
 	$.ajax({
-		type: "POST", url: _url, data: "accion=get_id&idE=" + dat._form[2].value,
-		success: function (data) { id_Max = eval(data); }, async: false
+		type: "POST",
+		url: _url,
+		data: "accion=get_id&idE=" + dat._form[2].value,
+		success: function (data) { id_Max = eval(data); },
+		async: false
 	});
 
 	if (tp == 2) {
@@ -115,7 +130,7 @@ function __SAVE_() {
 		___SAVE_(dat1, 'bi', '_view', '../_php/__all_view.php');
 	}
 	__Faturar(id_Max[0][0]);
-}//---------------------------------------------------------------
+} //---------------------------------------------------------------
 
 function __Faturar(id) {
 	//$('#fac').html('<a id="_fac" href="pdf_.php?id_Ma='+id+'" target="_blank"></a>');
@@ -123,6 +138,7 @@ function __Faturar(id) {
 	// $("#fac").();
 	document.getElementById("fac").click();
 }
+
 function __DELL_(id) {
 	var dat = { accion: "_DELETE", t_name: "factura", id: id };
 	___DELL_(dat, '_view', '../_php/__all_view.php');
@@ -143,42 +159,47 @@ function full_form_(i) {
 
 
 var dt_data;
+
 function __LOAD_() {
 	$.ajax({
-		type: "POST", url: _url, data: { accion: "load" }, async: false,
+		type: "POST",
+		url: _url,
+		data: { accion: "load" },
+		async: false,
 		success: function (data) {
 			var i = 0;
 			dt_data = eval(data);
 			$('#_list').DataTable({
 				"destroy": true,
 				"data": dt_data,
-				"columns": [
-					{
-						"data": "",
-						"render": function (data, type, row) {
-							i++; return i;
-						}
-					},
-					{ "data": "cNome" },
-					{ "data": "bi_passaporte" },
-					{ "data": "nome" },
-					{ "data": "ffpNome" },
-					{ "data": "valor_final" },
-					{ "data": "data" },
-					{
-						"data": "div",
-						"render": function (data, type, row) {
-							return '<div align="right"><img id="' + i + '" onClick="full_form_(this.id)"  src="../images/mono-icons/notepencil32.png" width="20px" height="20px" style="cursor: pointer" />' +
-								'<img id ="' + row.id + '" onClick="__DELL_(this.id)" src="../images/mono-icons/usersminus32.png" width="20px" height="20px" style="cursor: pointer" /></div>';
-						}
-					},
-					{
-						"data": "a",
-						"render": function (data, type, row) {
-							return '<a href="pdf_.php?id_Ma=' + row.id + '" target="_blank"><img src="../images/menu/7.ico"  width="18px" height="18px" style="vertical-align:middle" /></a>';
-						}
+				"columns": [{
+					"data": "",
+					"render": function (data, type, row) {
+						i++;
+						return i;
 					}
-				], "language": dt_idioma
+				},
+				{ "data": "cNome" },
+				{ "data": "bi_passaporte" },
+				{ "data": "nome" },
+				{ "data": "ffpNome" },
+				{ "data": "valor_final" },
+				{ "data": "data" },
+				{
+					"data": "div",
+					"render": function (data, type, row) {
+						return '<div align="right"><img id="' + i + '" onClick="full_form_(this.id)"  src="../images/mono-icons/notepencil32.png" width="20px" height="20px" style="cursor: pointer" />' +
+							'<img id ="' + row.id + '" onClick="__DELL_(this.id)" src="../images/mono-icons/usersminus32.png" width="20px" height="20px" style="cursor: pointer" /></div>';
+					}
+				},
+				{
+					"data": "a",
+					"render": function (data, type, row) {
+						return '<a href="pdf_.php?id_Ma=' + row.id + '" target="_blank"><img src="../images/menu/7.ico"  width="18px" height="18px" style="vertical-align:middle" /></a>';
+					}
+				}
+				],
+				"language": dt_idioma
 			});
 
 		}
@@ -187,7 +208,9 @@ function __LOAD_() {
 
 function _get_EST_() {
 	$.ajax({
-		type: "POST", url: "../g_Matricula/php.php", data: "accion=get_EST&BI=" + $('#bi').val(),
+		type: "POST",
+		url: "../g_Matricula/php.php",
+		data: "accion=get_EST&BI=" + $('#bi').val(),
 		success: function (data) {
 			data = eval(data);
 
@@ -198,21 +221,34 @@ function _get_EST_() {
 				se.innerHTML = op;
 			}
 
-		}, async: false
+		},
+		async: false
 	});
 
 }
+
 function set_detalhe() {
 	tp = $('#tipo_pagamento').val();
-	if (tp == 2) { $('#exam').fadeOut('fast'); $('#prop').fadeIn('fast'); } else
-		if (tp == 3) { $('#exam').fadeIn('fast'); $('#prop').fadeOut('fast'); } else { $('#exam').fadeOut('fast'); $('#prop').fadeOut('fast'); }
+	if (tp == 2) {
+		$('#exam').fadeOut('fast');
+		$('#prop').fadeIn('fast');
+	} else
+		if (tp == 3) {
+			$('#exam').fadeIn('fast');
+			$('#prop').fadeOut('fast');
+		} else {
+			$('#exam').fadeOut('fast');
+			$('#prop').fadeOut('fast');
+		}
 }
 
 function _getGrelha_() {
 	$('#grelha').html('');
 
 	$.ajax({
-		type: "POST", url: '../g_Grelha/php.php', data: { accion: "load" },
+		type: "POST",
+		url: '../g_Grelha/php.php',
+		data: { accion: "load" },
 		success: function (data) {
 			data = eval(data);
 
@@ -224,6 +260,7 @@ function _getGrelha_() {
 			});
 
 			se.innerHTML = op;
-		}, async: false
+		},
+		async: false
 	});
 }
