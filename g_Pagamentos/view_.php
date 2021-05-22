@@ -102,14 +102,14 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                         </tr>
                         <tr>
                           <td align="right"><strong>Banco:</strong></td>
-                          <td><select name="banco" type="text" id="banco">
+                          <td><select name="banco" type="text" id="banco" class="nomeBanco"> 
                             </select>
                             <font color="#FF0000">*</font>
                           </td>
                         </tr>
                         <tr>
                           <td align="right"><strong>Modo Pagamento:</strong></td>
-                          <td><select name="modo_pagamento" type="text" id="modo_pagamento">
+                          <td><select name="modo_pagamento" type="text" id="modo_pagamento" class="contaBanco">
                             </select>
                             <font color="#FF0000">*</font>
                           </td>
