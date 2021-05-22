@@ -32,14 +32,39 @@ $(document).ready(function(e) {
     //============================
 
 
-    _getGrelha_();
-    __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
+
+    // // aNTERIOR CARREGAMENTO DA GRELHA
+    // _getGrelha_();
+    // __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
+    // _set_mounthBox('mes');
+
+
+
+    //CARREGAMENTO DA GRELHA de disciplinas de acordo ao BI
+    // _getGrelha_();
+    $('#bi').keyup(function(e) {
+        if (e.keyCode == 13) {
+            __GET_COMBOXS_('disc', 'loadDiscCurso&grelha=' + $('#bi').val(), 'dDesc', '../g_Disciplina/php.php');
+        }
+    });
+    //============================
+
+
+
+
     _set_mounthBox('mes');
 
 
 
+
+    //Carregamento do valor em função do tipo de emolumeto seleccionado 
     var cb;
-    $('#bi').keyup(function(e) { if (e.keyCode == 13) { _get_EST_() } });
+    $('#bi').keyup(function(e) {
+        if (e.keyCode == 13) {
+            _get_EST_()
+        }
+    });
+
     $('#tipo_pagamento').change(function() {
         set_detalhe();
         if ($('#tipo_pagamento').val() > 0) {
@@ -53,6 +78,9 @@ $(document).ready(function(e) {
         }
 
     });
+    //=====
+
+
 
     $('#imposto, #desconto').keyup(function() {
         if ($('#desconto').val() == '') {
@@ -68,7 +96,11 @@ $(document).ready(function(e) {
 
     });
 
-    $('#grelha').change(function() { __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php'); });
+
+
+    // $('#grelha').change(function() {
+    //     __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
+    // });
 
 });
 
@@ -88,6 +120,7 @@ function __SAVE_() {
 
     //Analisa o valor pego do tipo de pagamento
     tp = $('#tipo_pagamento').val();
+
     if (tp == 2 || tp == 4)
         mes = $('#mes').val();
 
@@ -95,6 +128,7 @@ function __SAVE_() {
         disc = $('#disc').val();
 
     console.log("valor da disciplina____" + disc);
+
 
     var dat = {
         accion: "_SAVE",
@@ -116,12 +150,14 @@ function __SAVE_() {
         data: "accion=get_id&idE=" + dat._form[2].value,
 
 
+
+
         //entendi que pega o valor máximo e efectua uma comparação
         success: function(data) { id_Max = eval(data); },
         async: false
     });
 
-    //para guardar id da fatura na tabela_emolumento correspondente
+    //para guardar id da fatura na tabela_emolumento correspondente aos omolumentos normais
     if (tp == 1 || tp == 6 || tp == 7 || tp == 9 || tp == 11 || tp == 12 || tp == 13 || tp == 14 || tp == 15 || tp == 16 || tp == 17 || tp == 18 || tp == 19 || tp == 20 || tp == 21 || tp == 22 || tp == 24 || tp == 23 || tp == 25) {
         arr1 = [];
         arr1.push({ "name": "id", "value": '-' });
@@ -129,17 +165,21 @@ function __SAVE_() {
         tb = 'factura_emolumento';
 
     }
+
     //para guardar id da fatura na tabela o do que é relacionado a propinas correspondente
+
     if (tp == 2 || tp == 4) {
         arr1 = [];
         arr1.push({ "name": "id", "value": '-' });
         arr1.push({ "name": "mes_pago", "value": mes });
+
         arr1.push({ "name": "id_factura", "value": id_Max[0][0] });
 
         tb = 'factura_propina';
     }
     //para guardar id da fatura de tudo que é relacionado a exames correspondente
     if (tp == 3 || tp == 5 || tp == 8 || tp == 10) {
+
         arr1 = [];
         arr1.push({ "name": "id", "value": '-' });
         arr1.push({ "name": "id_disciplina", "value": disc });
@@ -154,23 +194,17 @@ function __SAVE_() {
         _form: arr1
     };
 
-    console.log("array de recurso a ser inserido___" + dat1);
-    console.log(dat1);
-    console.log(bi);
-    console.log("-");
-    console.log("-");
+
+
 
 
     //Salva os outros detalhes das outras tabelas relacionadas com faturas
     ___SAVE_(dat1, 'bi', '_view', '../_php/__all_view.php');
 
 
-    console.log("PASSOU PDF" + dat1);
-    // }
-    // console.log(id_Max[0][0]);
-    // console.log("CHEGOU");
-    //geração do recibo de factura
+
     __Faturar(id_Max[0][0]);
+
 
 
 }
@@ -193,7 +227,9 @@ function full_form_(i) {
     _get_EST_();
     $('#tipo_pagamento').val(dt_data[i - 1]['id_tipo_pagamento']);
 
+
     // para aparecer a combobox de disciplina
+
     set_detalhe();
 
     $('#_view').find(':input').each(function() {
@@ -278,9 +314,11 @@ function set_detalhe() {
     if (tp == 2) {
         $('#exam').fadeOut('fast');
         $('#prop').fadeIn('fast');
+
     }
 
     if (tp == 3 || tp == 5 || tp == 8 || tp == 10) {
+
         $('#exam').fadeIn('fast');
         $('#prop').fadeOut('fast');
     } else {

@@ -28,6 +28,8 @@ $txt = "SELECT
 			  (factura.id = '" . $_GET["id_Ma"] . "')";
 
 $query = __LOAD_($txt);
+// print_r($query);
+// die();
 
 
 // Creaci�n del objeto de la clase heredada
@@ -109,7 +111,7 @@ if ($query[0]['id_tipo_pagamento'] == 2) {
       $pdf->Cell(0, 6, '', 0, 0, 'L');
 }
 
-else if ($query[0]['id_tipo_pagamento'] == 3) {
+else if ($query[0]['id_tipo_pagamento'] == 3 || $query[0]['id_tipo_pagamento'] == 5 || $query[0]['id_tipo_pagamento'] == 8 || $query[0]['id_tipo_pagamento'] == 10) {
       $pdf->Ln();
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->Cell(23, 6, utf8_decode('Disciplina: '), 0, 0, 'L');
@@ -244,8 +246,8 @@ if ($query[0]['id_tipo_pagamento'] == 2) {
       $pdf->Cell(0, 6, '', 0, 0, 'L');
 }
 
-if ($query[0]['id_tipo_pagamento'] == 3) {
-      $pdf->Ln();
+if ($query[0]['id_tipo_pagamento'] == 3 || $query[0]['id_tipo_pagamento'] == 5 || $query[0]['id_tipo_pagamento'] == 8 || $query[0]['id_tipo_pagamento'] == 10) {
+      $pdf->Ln();-
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->Cell(23, 6, utf8_decode('Disciplina: '), 0, 0, 'L');
       $pdf->SetFont('Arial', '', 10);
