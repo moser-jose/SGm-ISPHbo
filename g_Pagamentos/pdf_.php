@@ -23,7 +23,7 @@ $txt = "SELECT
                     LEFT JOIN factura_propina ON (factura_propina.id_factura = factura.id)
                     INNER JOIN users ON (users.id = factura.id_funcionario)
                     LEFT JOIN factura_exame ON (factura_exame.id_factura = factura.id)
-                    INNER JOIN disciplina ON (disciplina.id = factura_exame.id_disciplina)
+                    LEFT JOIN disciplina ON (disciplina.id = factura_exame.id_disciplina)
 			WHERE
 			  (factura.id = '" . $_GET["id_Ma"] . "')";
 
