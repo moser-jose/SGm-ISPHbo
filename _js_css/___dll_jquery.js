@@ -109,7 +109,7 @@ function ___SAVE_(dat, cmp, _form, _url_) {
 			if (cmp !== 'tDesc') __RESET_(_form);
 			__BUTTON_();
 
-			$('#error').html('<font color="#000"><img width="18" height="18" src="../images/mono-icons/check32.png" />Operação com sucesso!</font>');
+			$('#error').html('<font color="green"><img width="18" height="18" src="../images/mono-icons/check32.png" />Operação com sucesso!</font>');
 			$('#error').fadeIn('slow');
 
 			$("#" + cmp).focus(function (e1) {

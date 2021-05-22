@@ -20,9 +20,9 @@ $txt = "SELECT
 			  INNER JOIN forma_pagamento ON (factura.id_modo_pagamento = forma_pagamento.id)
 			  INNER JOIN tipo_pagamento ON (factura.id_tipo_pagamento = tipo_pagamento.id)
 			  INNER JOIN curso ON (estudante.id_curso = curso.id)
-                    INNER JOIN factura_propina ON (factura_propina.id_factura = factura.id)
+                    LEFT JOIN factura_propina ON (factura_propina.id_factura = factura.id)
                     INNER JOIN users ON (users.id = factura.id_funcionario)
-                    INNER JOIN factura_exame ON (factura_exame.id_factura = factura.id)
+                    LEFT JOIN factura_exame ON (factura_exame.id_factura = factura.id)
                     INNER JOIN disciplina ON (disciplina.id = factura_exame.id_disciplina)
 			WHERE
 			  (factura.id = '" . $_GET["id_Ma"] . "')";
@@ -109,7 +109,7 @@ if ($query[0]['id_tipo_pagamento'] == 2) {
       $pdf->Cell(0, 6, '', 0, 0, 'L');
 }
 
-if ($query[0]['id_tipo_pagamento'] == 3) {
+else if ($query[0]['id_tipo_pagamento'] == 3) {
       $pdf->Ln();
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->Cell(23, 6, utf8_decode('Disciplina: '), 0, 0, 'L');
