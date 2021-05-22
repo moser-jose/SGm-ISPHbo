@@ -29,5 +29,3 @@ if ($_POST['accion'] == "getConta"){ $txt = "SELECT contas.*          FROM conta
 if ($_POST['accion'] == "get_id"){ $txt = "SELECT MAX(`factura`.`id`) 
                                              FROM `factura` 
 											WHERE (`factura`.`bi` = '".$_POST["idE"]."')"; echo json_encode( __LOAD_($txt) ); }
-
-?>
