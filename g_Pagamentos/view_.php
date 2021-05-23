@@ -90,7 +90,7 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                         </tr>
 
                         <tr id="prop" style="display: none">
-                          <td align="right"><strong>Mes Pago:</strong></td>
+                          <td align="right"><strong>Mês a Pagar:</strong></td>
                           <td><select name="mes" id="mes"></select>
                             <font color="#FF0000">*</font>
                           </td>
@@ -104,7 +104,7 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                         </tr>
                         <tr>
                           <td align="right"><strong>Banco:</strong></td>
-                          <td><select name="banco" type="text" id="banco" class="nomeBanco"> 
+                          <td><select name="banco" type="text" id="banco" class="nomeBanco">
                             </select>
                             <font color="#FF0000">*</font>
                           </td>

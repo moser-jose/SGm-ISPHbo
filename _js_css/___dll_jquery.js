@@ -5,13 +5,13 @@ function __GET_COMBOXS_(idc, action, value, url_) {
         type: "POST",
         url: url_,
         data: "accion=" + action,
-        success: function(data) {
+        success: function (data) {
             data = eval(data);
             se = document.getElementById(idc);
 
             op = '';
             op = "<option value=" + '0' + ">Selecione --</option>";
-            $.each(data, function(i, dat) {
+            $.each(data, function (i, dat) {
                 costo = dat["costo"];
                 op += '<option style="cursor:pointer" value="' + dat["id"] + '">' + dat[value] + '</option>';
             });
@@ -31,9 +31,9 @@ function _PEGARDADOS_(tr, id, action, campo, url_) {
         type: "POST",
         url: url_,
         data: "accion=" + action,
-        success: function(data) {
+        success: function (data) {
             data = eval(data);
-            $.each(data, function(i, dat) {
+            $.each(data, function (i, dat) {
                 if (id === dat['id']) {
                     se.innerText = dat['costo'];
                     cb = dat['costo'];
@@ -110,12 +110,12 @@ function _idioma(idioma) {
 //-------------------------------------
 function ___SAVE_(dat, cmp, _form, _url_) {
     $.ajax({
-            type: "POST",
-            url: _url_,
-            data: dat,
-            async: false
-        })
-        .done(function(data) {
+        type: "POST",
+        url: _url_,
+        data: dat,
+        async: false
+    })
+        .done(function (data) {
 
             // console.log(eval(data));
 
@@ -126,15 +126,15 @@ function ___SAVE_(dat, cmp, _form, _url_) {
             $('#error').html('<font color="green"><img width="18" height="18" src="../images/mono-icons/check32.png" />Operação com sucesso!</font>');
             $('#error').fadeIn('slow');
 
-            $("#" + cmp).focus(function(e1) {
-                $('#error').fadeOut('fast', function(e2) { $('#error > font.font_v').remove(); });
+            $("#" + cmp).focus(function (e1) {
+                $('#error').fadeOut('fast', function (e2) { $('#error > font.font_v').remove(); });
             });
 
         });
 }
 
 function ___Full_Form_(i, _form) {
-    $('#' + _form).find(':input').each(function() {
+    $('#' + _form).find(':input').each(function () {
         $(this).val(dt_data[i - 1][$(this).attr('name')]);
     });
 
@@ -152,10 +152,10 @@ function ___DELL_(dat, _form, _url_) {
         confirmKeys: [13, 32],
         cancelKeys: [27],
         animation: 'scalex',
-        confirm: function() {
+        confirm: function () {
 
             $.ajax({ type: "POST", url: _url_, data: dat, async: false })
-                .done(function(data) {
+                .done(function (data) {
                     //poner el alert bonito
                     __RESET_(_form);
                     __LOAD_();
@@ -170,16 +170,39 @@ function _year() {
     return ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Septembro", "Outubro", "Novembro", "Decembro"];
 }
 
-function _set_mounthBox(id) {
 
-    se = document.getElementById(id);
-    op = '';
-    mounth_ = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Septembro", "Outubro", "Novembro", "Decembro"];
-    $(mounth_).each(function(i, dat) {
-        op += '<option style="cursor:pointer" value="' + dat + '">' + dat + '</option>';
+//melhoria na função para mostrar só os meses que o estudante pagou.
+
+function _set_mounthBox(id, action, url_) {
+    se = document.getElementById('mes');
+    arr = [];
+    $.ajax({
+        type: "POST",
+        url: url_,
+        data: "accion=" + action,
+        success: function (data) {
+            data = eval(data);
+            $.each(data, function (i, dat) {
+                arr.push(dat['mes_pago'])
+            });
+        },
+        async: false
     });
 
+    mounth_ = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+    //remove os meses que o estudante pagou
+    var arr_final = mounth_.filter(e => {
+        return arr.indexOf(e) == -1;
+    });
+    op = '';
+    op = "<option value=" + '0' + ">Selecione --</option>";
+    $(arr_final).each(function (i, dat) {
+        op += '<option style="cursor:pointer" value="' + dat + '">' + dat + '</option>';
+    });
     se.innerHTML = op;
+
+
 }
 
 function _set_YearBox(id) {
@@ -210,7 +233,7 @@ function _week() {
 ///////Clear the form///////////////
 function __RESET_(form) {
 
-    $('#' + form).find(':input').each(function() {
+    $('#' + form).find(':input').each(function () {
         switch (this.type) {
             case 'password':
             case 'select-multiple':
@@ -314,20 +337,20 @@ function _form_Load_(f, t) {
 //****************************************************************************************************************************//
 /*for to load message delete*/
 /*function __popUp_del_(id){
-	$( '#id_'   ).attr("value", id);
-	$( '#text_' ).html('¿Está usted seguro de que desea eliminar el Registro actual?');
+    $( '#id_'   ).attr("value", id);
+    $( '#text_' ).html('¿Está usted seguro de que desea eliminar el Registro actual?');
 
-	$("#dialog-confirm").dialog("destroy");
-	$("#dialog-confirm").dialog({
-			title: "Confirmación de Eliminación!",
-			show: "drop",
-			width: 300,			  hide: "drop",
-			modal: true,		  resizable: false,
-			closeOnEscape:false,  autoOpen: false
+    $("#dialog-confirm").dialog("destroy");
+    $("#dialog-confirm").dialog({
+            title: "Confirmación de Eliminación!",
+            show: "drop",
+            width: 300,			  hide: "drop",
+            modal: true,		  resizable: false,
+            closeOnEscape:false,  autoOpen: false
 
-	});
-	$("#dialog-confirm").dialog("open");
-	$("#dialog-confirm").slideDown("fast");
+    });
+    $("#dialog-confirm").dialog("open");
+    $("#dialog-confirm").slideDown("fast");
 }*/
 
 //****************************************************************************************************************************//
@@ -361,7 +384,7 @@ function ___Grafic_View_(_title, _Conteudo) {
         theme: 'white',
         icon: 'fa fa-question-circle',
         animation: 'scalex',
-        cancel: function() {
+        cancel: function () {
             //___Grafic_View_(_title, _Conteudo);
 
         }
