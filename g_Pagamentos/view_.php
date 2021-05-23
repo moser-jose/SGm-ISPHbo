@@ -44,6 +44,8 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                   <td width="58%" align="center">
 
                     <input type="text" value="<?= $_SESSION["id_u"] ?>" name="func" id="func" style="display: none" />
+
+                    <!-- INICIO DO FORMULÁRIO -->
                     <form id="_view" name="_view" method="post">
                       <input type="text" value="-" name="id" id="id" style="display: none" />
 
