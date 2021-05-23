@@ -33,6 +33,7 @@ $(document).ready(function(e) {
 
 
 
+
     // // aNTERIOR CARREGAMENTO DA GRELHA
     // _getGrelha_();
     // __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
@@ -52,12 +53,15 @@ $(document).ready(function(e) {
 
 
 
+
     _set_mounthBox('mes');
 
 
 
 
+
     //Carregamento do valor em função do tipo de emolumeto seleccionado 
+
     var cb;
     $('#bi').keyup(function(e) {
         if (e.keyCode == 13) {
@@ -78,7 +82,9 @@ $(document).ready(function(e) {
         }
 
     });
+
     //=====
+
 
 
 
@@ -98,9 +104,11 @@ $(document).ready(function(e) {
 
 
 
+
     // $('#grelha').change(function() {
     //     __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
     // });
+
 
 });
 
@@ -198,8 +206,12 @@ function __SAVE_() {
 
 
 
+
+
     //Salva os outros detalhes das outras tabelas relacionadas com faturas
     ___SAVE_(dat1, 'bi', '_view', '../_php/__all_view.php');
+
+
 
 
 
