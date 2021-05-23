@@ -96,8 +96,8 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                           </td>
                         </tr>
                         <tr id="exam" style="display: none">
-                          <td align="right"><strong>Grelha/Disciplina:</strong></td>
-                          <td><select name="grelha" type="text" id="grelha"></select><br />
+                          <td align="right"><strong>Disciplinas:</strong></td>
+                          <td>
                             <select name="disc" id="disc"></select>
                             <font color="#FF0000">*</font>
                           </td>

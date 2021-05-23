@@ -34,15 +34,52 @@ $(document).ready(function (e) {
 
 
 
+<<<<<<< HEAD
     _getGrelha_();
     __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
+=======
+    // // aNTERIOR CARREGAMENTO DA GRELHA
+    // _getGrelha_();
+    // __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
+    // _set_mounthBox('mes');
 
 
 
+    //CARREGAMENTO DA GRELHA de disciplinas de acordo ao BI
+    // _getGrelha_();
+    $('#bi').keyup(function(e) {
+        if (e.keyCode == 13) {
+            __GET_COMBOXS_('disc', 'loadDiscCurso&grelha=' + $('#bi').val(), 'dDesc', '../g_Disciplina/php.php');
+        }
+    });
+    //============================
+
+
+
+
+
+    _set_mounthBox('mes');
+
+>>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
+
+
+
+
+    //Carregamento do valor em função do tipo de emolumeto seleccionado 
 
     var cb;
+<<<<<<< HEAD
     $('#bi').keyup(function (e) { if (e.keyCode == 13) { _get_EST_() } });
     $('#tipo_pagamento').change(function () {
+=======
+    $('#bi').keyup(function(e) {
+        if (e.keyCode == 13) {
+            _get_EST_()
+        }
+    });
+
+    $('#tipo_pagamento').change(function() {
+>>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
         set_detalhe();
         if ($('#tipo_pagamento').val() > 0) {
             cb = _PEGARDADOS_('val_e', $('#tipo_pagamento').val(), 'getTP', 'valor_emulumentos', _url);
@@ -55,6 +92,9 @@ $(document).ready(function (e) {
         }
 
     });
+
+    //=====
+
 
 
 
@@ -74,7 +114,15 @@ $(document).ready(function (e) {
 
 
 
+<<<<<<< HEAD
     $('#grelha').change(function () { __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php'); });
+=======
+
+    // $('#grelha').change(function() {
+    //     __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
+    // });
+
+>>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
 
 });
 
@@ -131,7 +179,7 @@ function __SAVE_() {
         async: false
     });
 
-    //para guardar id da fatura na tabela_emolumento correspondente
+    //para guardar id da fatura na tabela_emolumento correspondente aos omolumentos normais
     if (tp == 1 || tp == 6 || tp == 7 || tp == 9 || tp == 11 || tp == 12 || tp == 13 || tp == 14 || tp == 15 || tp == 16 || tp == 17 || tp == 18 || tp == 19 || tp == 20 || tp == 21 || tp == 22 || tp == 24 || tp == 23 || tp == 25) {
         arr1 = [];
         arr1.push({ "name": "id", "value": '-' });
@@ -170,6 +218,11 @@ function __SAVE_() {
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
 
 
     //Salva os outros detalhes das outras tabelas relacionadas com faturas
@@ -177,6 +230,11 @@ function __SAVE_() {
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
     __Faturar(id_Max[0][0]);
 
 
