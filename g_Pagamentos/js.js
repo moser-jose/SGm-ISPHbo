@@ -34,10 +34,6 @@ $(document).ready(function (e) {
 
 
 
-<<<<<<< HEAD
-    _getGrelha_();
-    __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
-=======
     // // aNTERIOR CARREGAMENTO DA GRELHA
     // _getGrelha_();
     // __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
@@ -58,20 +54,9 @@ $(document).ready(function (e) {
 
 
 
-    _set_mounthBox('mes');
-
->>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
-
-
-
-
     //Carregamento do valor em função do tipo de emolumeto seleccionado 
 
     var cb;
-<<<<<<< HEAD
-    $('#bi').keyup(function (e) { if (e.keyCode == 13) { _get_EST_() } });
-    $('#tipo_pagamento').change(function () {
-=======
     $('#bi').keyup(function(e) {
         if (e.keyCode == 13) {
             _get_EST_()
@@ -79,7 +64,6 @@ $(document).ready(function (e) {
     });
 
     $('#tipo_pagamento').change(function() {
->>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
         set_detalhe();
         if ($('#tipo_pagamento').val() > 0) {
             cb = _PEGARDADOS_('val_e', $('#tipo_pagamento').val(), 'getTP', 'valor_emulumentos', _url);
@@ -114,15 +98,11 @@ $(document).ready(function (e) {
 
 
 
-<<<<<<< HEAD
-    $('#grelha').change(function () { __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php'); });
-=======
 
     // $('#grelha').change(function() {
     //     __GET_COMBOXS_('disc', 'load&grelha=' + $('#grelha').val(), 'dDesc', '../g_Disciplina/php.php');
     // });
 
->>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
 
 });
 
@@ -218,11 +198,8 @@ function __SAVE_() {
 
 
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
 
 
     //Salva os outros detalhes das outras tabelas relacionadas com faturas
@@ -230,11 +207,8 @@ function __SAVE_() {
 
 
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 6efeadfad08218f8feda8af9d62fc81f373409de
     __Faturar(id_Max[0][0]);
 
 
