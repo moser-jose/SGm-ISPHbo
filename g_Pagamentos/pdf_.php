@@ -98,7 +98,7 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 6, '', 0, 0, 'L');
 
 /*****************/
-if ($query[0]['id_tipo_pagamento'] == 2) {
+if ($query[0]['id_tipo_pagamento'] == 2 || $query[0]['id_tipo_pagamento'] == 4) {
       $pdf->Ln();
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->Cell(23, 6, utf8_decode('Més a Pagar: '), 0, 0, 'L');
@@ -233,7 +233,7 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 6, '', 0, 0, 'L');
 
 /*****************/
-if ($query[0]['id_tipo_pagamento'] == 2) {
+if ($query[0]['id_tipo_pagamento'] == 2 || $query[0]['id_tipo_pagamento'] == 4) {
       $pdf->Ln();
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->Cell(23, 6, utf8_decode('Més a Pagar: '), 0, 0, 'L');
