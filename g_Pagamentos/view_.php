@@ -44,6 +44,8 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                   <td width="58%" align="center">
 
                     <input type="text" value="<?= $_SESSION["id_u"] ?>" name="func" id="func" style="display: none" />
+
+                    <!-- INICIO DO FORMULÁRIO -->
                     <form id="_view" name="_view" method="post">
                       <input type="text" value="-" name="id" id="id" style="display: none" />
 
@@ -61,7 +63,7 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                       <table width="60%">
                         <tr>
                           <td align="right"><strong>BI/Passaporte:</strong></td>
-                          <td><input name="bi" type="text" id="bi">
+                          <td><input name="bi" type="text" id="bi" value="007251946LA041">
                             <font color="#FF0000">*</font>
                           </td>
                         </tr>
@@ -88,21 +90,21 @@ if (!isset($_SESSION["usser"])) { ?> <script>
                         </tr>
 
                         <tr id="prop" style="display: none">
-                          <td align="right"><strong>Mes Pago:</strong></td>
+                          <td align="right"><strong>Mês a Pagar:</strong></td>
                           <td><select name="mes" id="mes"></select>
                             <font color="#FF0000">*</font>
                           </td>
                         </tr>
                         <tr id="exam" style="display: none">
-                          <td align="right"><strong>Grelha/Disciplina:</strong></td>
-                          <td><select name="grelha" type="text" id="grelha"></select><br />
+                          <td align="right"><strong>Disciplinas:</strong></td>
+                          <td>
                             <select name="disc" id="disc"></select>
                             <font color="#FF0000">*</font>
                           </td>
                         </tr>
                         <tr>
                           <td align="right"><strong>Banco:</strong></td>
-                          <td><select name="banco" type="text" id="banco" class="nomeBanco"> 
+                          <td><select name="banco" type="text" id="banco" class="nomeBanco">
                             </select>
                             <font color="#FF0000">*</font>
                           </td>
