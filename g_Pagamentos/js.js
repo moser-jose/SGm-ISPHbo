@@ -1,7 +1,7 @@
 ﻿//url general para el js.
 var _url = '../g_Pagamentos/php.php';
 
-$(document).ready(function (e) {
+$(document).ready(function(e) {
 
 
     __LOAD_();
@@ -24,7 +24,7 @@ $(document).ready(function (e) {
     //Para mudar a conta do banco de acordo ao banco
     __GET_COMBOXS_('conta', 'getConta&b=' + $('#banco').val(), 'contNumero', _url);
 
-    $("select.nomeBanco").change(function () {
+    $("select.nomeBanco").change(function() {
         var idBanco = $(this).attr('value');
         __GET_COMBOXS_('conta', 'getConta&b=' + idBanco, 'contNumero', _url);
 
@@ -55,7 +55,6 @@ $(document).ready(function (e) {
 
 
     //Carregamento do valor em função do tipo de emolumeto seleccionado 
-
     var cb;
     $('#bi').keyup(function(e) {
         if (e.keyCode == 13) {
@@ -82,7 +81,7 @@ $(document).ready(function (e) {
 
 
 
-    $('#imposto, #desconto').keyup(function () {
+    $('#imposto, #desconto').keyup(function() {
         if ($('#desconto').val() == '') {
             $('#desconto').val(0)
         }
@@ -155,7 +154,7 @@ function __SAVE_() {
 
 
         //entendi que pega o valor máximo e efectua uma comparação
-        success: function (data) { id_Max = eval(data); },
+        success: function(data) { id_Max = eval(data); },
         async: false
     });
 
@@ -238,7 +237,7 @@ function full_form_(i) {
 
     set_detalhe();
 
-    $('#_view').find(':input').each(function () {
+    $('#_view').find(':input').each(function() {
         $(this).val(dt_data[i - 1][$(this).attr('name')]);
     });
 
@@ -254,38 +253,38 @@ function __LOAD_() {
         url: _url,
         data: { accion: "load" },
         async: false,
-        success: function (data) {
+        success: function(data) {
             var i = 0;
             dt_data = eval(data);
             $('#_list').DataTable({
                 "destroy": true,
                 "data": dt_data,
                 "columns": [{
-                    "data": "",
-                    "render": function (data, type, row) {
-                        i++;
-                        return i;
+                        "data": "",
+                        "render": function(data, type, row) {
+                            i++;
+                            return i;
+                        }
+                    },
+                    { "data": "cNome" },
+                    { "data": "bi_passaporte" },
+                    { "data": "nome" },
+                    { "data": "ffpNome" },
+                    { "data": "valor_final" },
+                    { "data": "data" },
+                    {
+                        "data": "div",
+                        "render": function(data, type, row) {
+                            return '<div align="right"><img id="' + i + '" onClick="full_form_(this.id)"  src="../images/mono-icons/notepencil32.png" width="20px" height="20px" style="cursor: pointer" />' +
+                                '<img id ="' + row.id + '" onClick="__DELL_(this.id)" src="../images/mono-icons/usersminus32.png" width="20px" height="20px" style="cursor: pointer" /></div>';
+                        }
+                    },
+                    {
+                        "data": "a",
+                        "render": function(data, type, row) {
+                            return '<a href="pdf_.php?id_Ma=' + row.id + '" target="_blank"><img src="../images/menu/7.ico"  width="18px" height="18px" style="vertical-align:middle" /></a>';
+                        }
                     }
-                },
-                { "data": "cNome" },
-                { "data": "bi_passaporte" },
-                { "data": "nome" },
-                { "data": "ffpNome" },
-                { "data": "valor_final" },
-                { "data": "data" },
-                {
-                    "data": "div",
-                    "render": function (data, type, row) {
-                        return '<div align="right"><img id="' + i + '" onClick="full_form_(this.id)"  src="../images/mono-icons/notepencil32.png" width="20px" height="20px" style="cursor: pointer" />' +
-                            '<img id ="' + row.id + '" onClick="__DELL_(this.id)" src="../images/mono-icons/usersminus32.png" width="20px" height="20px" style="cursor: pointer" /></div>';
-                    }
-                },
-                {
-                    "data": "a",
-                    "render": function (data, type, row) {
-                        return '<a href="pdf_.php?id_Ma=' + row.id + '" target="_blank"><img src="../images/menu/7.ico"  width="18px" height="18px" style="vertical-align:middle" /></a>';
-                    }
-                }
                 ],
                 "language": dt_idioma
             });
@@ -299,7 +298,7 @@ function _get_EST_() {
         type: "POST",
         url: "../g_Matricula/php.php",
         data: "accion=get_EST&BI=" + $('#bi').val(),
-        success: function (data) {
+        success: function(data) {
             data = eval(data);
 
             if (data != '') {
@@ -316,15 +315,14 @@ function _get_EST_() {
 
 }
 
+//Para apresentar as comboxs de acordo aos valores seleccionados
 function set_detalhe() {
     tp = $('#tipo_pagamento').val();
-    if (tp == 2) {
+    if (tp == 2 || tp == 4) {
         $('#exam').fadeOut('fast');
         $('#prop').fadeIn('fast');
 
-    }
-
-    else if (tp == 3 || tp == 5 || tp == 8 || tp == 10) {
+    } else if (tp == 3 || tp == 5 || tp == 8 || tp == 10) {
 
         $('#exam').fadeIn('fast');
         $('#prop').fadeOut('fast');
@@ -341,13 +339,13 @@ function _getGrelha_() {
         type: "POST",
         url: '../g_Grelha/php.php',
         data: { accion: "load" },
-        success: function (data) {
+        success: function(data) {
             data = eval(data);
 
             se = document.getElementById('grelha');
             op = '';
 
-            $.each(data, function (i, dat) {
+            $.each(data, function(i, dat) {
                 op += '<option style="cursor:pointer" value="' + dat["id"] + '">' + dat["gDesc"] + ' (' + dat['cDesc'] + ')' + '</option>';
             });
 
