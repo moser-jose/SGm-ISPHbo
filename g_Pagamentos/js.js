@@ -331,7 +331,7 @@ function set_detalhe() {
         $('#prop').fadeOut('fast');
     }
 }
-
+//NOva alteracao
 function _getGrelha_() {
     $('#grelha').html('');
 
